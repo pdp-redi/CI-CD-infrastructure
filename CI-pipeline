@@ -1,0 +1,42 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('git clone') {
+            steps {
+                git branch: 'main', url: "https://github.com/pdp-redi/loadbalancer.git" 
+                sh "echo git"
+            }
+        }
+        stage('Docker login'){
+            steps{
+                sh 'aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 637165239391.dkr.ecr.us-east-2.amazonaws.com'
+            }
+        }
+        stage('Docker build') {
+            steps{
+                sh "docker build -t hello-cloud ."
+            }
+        }        
+        
+        stage('Docker tag') {
+            steps{
+                sh "docker tag hello-cloud:latest 637165239391.dkr.ecr.us-east-2.amazonaws.com/hello-cloud:$BUILD_NUMBER"
+            }
+        }  
+
+        stage('Docker push') {
+            steps{
+                sh "docker push 637165239391.dkr.ecr.us-east-2.amazonaws.com/hello-cloud:$BUILD_NUMBER"
+            }
+        }  
+        stage('Docker ansible') {
+            steps{
+                sh "chmod 400 windows.pem"
+                sh "ansible-playbook -i inventory cd.yaml"
+            }
+        }  
+
+     }
+ }
