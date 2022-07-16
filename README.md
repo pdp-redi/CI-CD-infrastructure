@@ -7,7 +7,7 @@ Design provisioning and deployment of a docker based web app in a cloud.
 - ansible
 - docker
 
-## Design Provisioning and Deployment - tool
+## Design Provisioning - tool
 - Terraform
 -------
 
