@@ -9,4 +9,4 @@
       shell: docker pull 984994506673.dkr.ecr.us-east-2.amazonaws.com/hello-world
 
     - name:  Docker run
-      shell: docker run --name nginx -d -p 8080:80 nginx
+      shell: docker run --name nginx -d -p 80:80 nginx
