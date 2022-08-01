@@ -1,0 +1,102 @@
+digraph {
+        compound = "true"
+        newrank = "true"
+        subgraph "root" {
+                "[root] aws_db_instance.default_sql (expand)" [label = "aws_db_instance.default_sql", shape = "box"]
+                "[root] aws_db_subnet_group.default_rds_mssql (expand)" [label = "aws_db_subnet_group.default_rds_mssql", shape = "box"]
+                "[root] aws_ecr_repository.hello-world (expand)" [label = "aws_ecr_repository.hello-world", shape = "box"]
+                "[root] aws_eip.nat_eip (expand)" [label = "aws_eip.nat_eip", shape = "box"]
+                "[root] aws_iam_instance_profile.ec2_profile_hello_world (expand)" [label = "aws_iam_instance_profile.ec2_profile_hello_world", shape = "box"]
+                "[root] aws_iam_role.ec2_role_hello_world (expand)" [label = "aws_iam_role.ec2_role_hello_world", shape = "box"]
+                "[root] aws_iam_role_policy.ec2_policy (expand)" [label = "aws_iam_role_policy.ec2_policy", shape = "box"]
+                "[root] aws_instance.webserver (expand)" [label = "aws_instance.webserver", shape = "box"]
+                "[root] aws_internet_gateway.ig (expand)" [label = "aws_internet_gateway.ig", shape = "box"]
+                "[root] aws_lb.albpublic (expand)" [label = "aws_lb.albpublic", shape = "box"]
+                "[root] aws_lb_listener.private (expand)" [label = "aws_lb_listener.private", shape = "box"]
+                "[root] aws_lb_target_group.test (expand)" [label = "aws_lb_target_group.test", shape = "box"]
+                "[root] aws_lb_target_group_attachment.test (expand)" [label = "aws_lb_target_group_attachment.test", shape = "box"]
+                "[root] aws_nat_gateway.nat (expand)" [label = "aws_nat_gateway.nat", shape = "box"]
+                "[root] aws_route.private_nat_gateway (expand)" [label = "aws_route.private_nat_gateway", shape = "box"]
+                "[root] aws_route.route_pub (expand)" [label = "aws_route.route_pub", shape = "box"]
+                "[root] aws_route_table.route (expand)" [label = "aws_route_table.route", shape = "box"]
+                "[root] aws_route_table_association.public (expand)" [label = "aws_route_table_association.public", shape = "box"]
+                "[root] aws_security_group.albpublic (expand)" [label = "aws_security_group.albpublic", shape = "box"]
+                "[root] aws_security_group.ec2 (expand)" [label = "aws_security_group.ec2", shape = "box"]
+                "[root] aws_security_group.rds_sql_security_group (expand)" [label = "aws_security_group.rds_sql_security_group", shape = "box"]
+                "[root] aws_subnet.private_subnet (expand)" [label = "aws_subnet.private_subnet", shape = "box"]
+                "[root] aws_subnet.public_subnet (expand)" [label = "aws_subnet.public_subnet", shape = "box"]
+                "[root] aws_vpc.vpc (expand)" [label = "aws_vpc.vpc", shape = "box"]
+                "[root] output.pvt" [label = "output.pvt", shape = "note"]
+                "[root] provider[\"registry.terraform.io/hashicorp/aws\"]" [label = "provider[\"registry.terraform.io/hashicorp/aws\"]", shape = "diamond"]
+                "[root] var.environment" [label = "var.environment", shape = "note"]
+                "[root] var.mssql_admin_password" [label = "var.mssql_admin_password", shape = "note"]
+                "[root] var.mssql_admin_username" [label = "var.mssql_admin_username", shape = "note"]
+                "[root] var.rds_allocated_storage" [label = "var.rds_allocated_storage", shape = "note"]
+                "[root] var.rds_instance_class" [label = "var.rds_instance_class", shape = "note"]
+                "[root] var.rds_multi_az" [label = "var.rds_multi_az", shape = "note"]
+                "[root] var.type" [label = "var.type", shape = "note"]
+                "[root] aws_db_instance.default_sql (expand)" -> "[root] aws_db_subnet_group.default_rds_mssql (expand)"
+                "[root] aws_db_instance.default_sql (expand)" -> "[root] var.mssql_admin_password"
+                "[root] aws_db_instance.default_sql (expand)" -> "[root] var.mssql_admin_username"
+                "[root] aws_db_instance.default_sql (expand)" -> "[root] var.rds_allocated_storage"
+                "[root] aws_db_instance.default_sql (expand)" -> "[root] var.rds_instance_class"
+                "[root] aws_db_subnet_group.default_rds_mssql (expand)" -> "[root] aws_subnet.private_subnet (expand)"
+                "[root] aws_db_subnet_group.default_rds_mssql (expand)" -> "[root] var.environment"
+                "[root] aws_ecr_repository.hello-world (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+                "[root] aws_eip.nat_eip (expand)" -> "[root] local.environment (expand)"
+                "[root] aws_eip.nat_eip (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+                "[root] aws_iam_instance_profile.ec2_profile_hello_world (expand)" -> "[root] aws_iam_role.ec2_role_hello_world (expand)"
+                "[root] aws_iam_role.ec2_role_hello_world (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+                "[root] aws_iam_role_policy.ec2_policy (expand)" -> "[root] aws_iam_role.ec2_role_hello_world (expand)"
+                "[root] aws_instance.webserver (expand)" -> "[root] aws_iam_instance_profile.ec2_profile_hello_world (expand)"
+                "[root] aws_instance.webserver (expand)" -> "[root] aws_security_group.ec2 (expand)"
+                "[root] aws_instance.webserver (expand)" -> "[root] aws_subnet.public_subnet (expand)"
+                "[root] aws_instance.webserver (expand)" -> "[root] local.amilinux (expand)"
+                "[root] aws_instance.webserver (expand)" -> "[root] local.key_name (expand)"
+                "[root] aws_instance.webserver (expand)" -> "[root] local.type (expand)"
+                "[root] aws_internet_gateway.ig (expand)" -> "[root] aws_vpc.vpc (expand)"
+                "[root] aws_lb.albpublic (expand)" -> "[root] aws_security_group.albpublic (expand)"
+                "[root] aws_lb.albpublic (expand)" -> "[root] aws_subnet.public_subnet (expand)"
+                "[root] aws_lb_listener.private (expand)" -> "[root] aws_lb.albpublic (expand)"
+                "[root] aws_lb_listener.private (expand)" -> "[root] aws_lb_target_group.test (expand)"
+                "[root] aws_lb_target_group.test (expand)" -> "[root] aws_vpc.vpc (expand)"
+                "[root] aws_lb_target_group_attachment.test (expand)" -> "[root] aws_instance.webserver (expand)"
+                "[root] aws_lb_target_group_attachment.test (expand)" -> "[root] aws_lb_target_group.test (expand)"
+                "[root] aws_nat_gateway.nat (expand)" -> "[root] aws_eip.nat_eip (expand)"
+                "[root] aws_nat_gateway.nat (expand)" -> "[root] aws_subnet.public_subnet (expand)"
+                "[root] aws_route.private_nat_gateway (expand)" -> "[root] aws_nat_gateway.nat (expand)"
+                "[root] aws_route.private_nat_gateway (expand)" -> "[root] aws_route_table.route (expand)"
+                "[root] aws_route.route_pub (expand)" -> "[root] aws_internet_gateway.ig (expand)"
+                "[root] aws_route.route_pub (expand)" -> "[root] aws_route_table.route (expand)"
+                "[root] aws_route_table.route (expand)" -> "[root] aws_vpc.vpc (expand)"
+                "[root] aws_route_table.route (expand)" -> "[root] local.routetype (expand)"
+                "[root] aws_route_table_association.public (expand)" -> "[root] aws_route_table.route (expand)"
+                "[root] aws_route_table_association.public (expand)" -> "[root] aws_subnet.public_subnet (expand)"
+                "[root] aws_security_group.albpublic (expand)" -> "[root] aws_vpc.vpc (expand)"
+                "[root] aws_security_group.ec2 (expand)" -> "[root] aws_security_group.albpublic (expand)"
+                "[root] aws_security_group.rds_sql_security_group (expand)" -> "[root] aws_vpc.vpc (expand)"
+                "[root] aws_security_group.rds_sql_security_group (expand)" -> "[root] var.environment"
+                "[root] aws_subnet.private_subnet (expand)" -> "[root] aws_vpc.vpc (expand)"
+                "[root] aws_subnet.private_subnet (expand)" -> "[root] local.availability_zones (expand)"
+                "[root] aws_subnet.private_subnet (expand)" -> "[root] local.cidr_block_private (expand)"
+                "[root] aws_subnet.public_subnet (expand)" -> "[root] aws_vpc.vpc (expand)"
+                "[root] aws_subnet.public_subnet (expand)" -> "[root] local.availability_zones (expand)"
+                "[root] aws_subnet.public_subnet (expand)" -> "[root] local.cidr_block_public (expand)"
+                "[root] aws_vpc.vpc (expand)" -> "[root] local.environment (expand)"
+                "[root] aws_vpc.vpc (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+                "[root] output.pvt" -> "[root] aws_subnet.private_subnet (expand)"
+                "[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_db_instance.default_sql (expand)"
+                "[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_ecr_repository.hello-world (expand)"
+                "[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_iam_role_policy.ec2_policy (expand)"
+                "[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_lb_listener.private (expand)"
+                "[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_lb_target_group_attachment.test (expand)"
+                "[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_route.private_nat_gateway (expand)"
+                "[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_route.route_pub (expand)"
+                "[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_route_table_association.public (expand)"
+                "[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_security_group.rds_sql_security_group (expand)"
+                "[root] root" -> "[root] output.pvt"
+                "[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)"
+                "[root] root" -> "[root] var.rds_multi_az"
+                "[root] root" -> "[root] var.type"
+        }
+}
