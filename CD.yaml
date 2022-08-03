@@ -6,10 +6,11 @@
   
   tasks:
     - name:  Docker login
-      shell: aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 984994506673.dkr.ecr.us-east-2.amazonaws.co
+      shell: aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 984994506673.dkr.ecr.us-east-2.amazonaws.com
   
     - name:  Docker pull
       shell: docker pull 984994506673.dkr.ecr.us-east-2.amazonaws.com/hello-world:1
 
     - name:  Docker run
-      shell: docker run --name nginx -d -p 80:80 nginx
+      shell: docker run --name nginx -d -p 80:80 hello-world
+
